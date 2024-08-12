@@ -108,7 +108,35 @@ with col6:
     plt.xticks(rotation=90)
     st.pyplot(fig)
 
-st.dataframe(df.groupby('Sport')[['Bet Amount per Event', 'Odds - Event']].agg(['mean', 'median']))
+#st.dataframe(df.groupby('Sport')[['Bet Amount per Event', 'Odds - Event']].agg(['mean', 'median']))
+
+
+# Perform the groupby operation
+sport_stats = df.groupby('Sport').agg({
+    'Bet Amount per Event': ['mean', 'median'],
+    'Odds - Event': ['mean', 'median']
+})
+
+# Flatten the column names
+sport_stats.columns = ['_'.join(col).strip() for col in sport_stats.columns.values]
+
+# Reset the index to make 'Sport' a column
+sport_stats = sport_stats.reset_index()
+
+# Custom formatting function
+def format_float(val):
+    return f"{val:.6f}".rstrip('0').rstrip('.')
+
+# Apply custom formatting
+formatted_sport_stats = sport_stats.copy()
+for col in sport_stats.columns[1:]:  # Skip the 'Sport' column
+    formatted_sport_stats[col] = sport_stats[col].apply(format_float)
+
+# Display the formatted dataframe
+st.dataframe(formatted_sport_stats)
+
+
+
 
 # Amount per Event Distribution
 st.header("Amount per Event Distribution")
