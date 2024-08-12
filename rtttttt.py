@@ -28,14 +28,22 @@ st.markdown("""
 - What sport event do users tend to spend more despite the odds?
 """)
 
+
+
+
+
+
 # Load the dataset
-st.markdown("## Data Loading and Overview")
 uploaded_file = st.file_uploader("Choose an Excel file", type="xlsx")
 
 if uploaded_file is not None:
+    # To read file as bytes:
+    bytes_data = uploaded_file.read()
+
+    # To convert bytes data into a pandas DataFrame:
     df = pd.read_excel(uploaded_file)
 
-    # Display the dataframe
+    # Now you can proceed with displaying the dataframe or any other operations
     st.write("### Data Preview")
     st.dataframe(df.head())
 
