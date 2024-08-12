@@ -15,7 +15,7 @@ from sklearn.preprocessing import StandardScaler
 
 # Set page configuration
 st.set_page_config(page_title="Betting Analysis Dashboard", layout="wide")
-Sport Popularity vs
+
 # Title and introduction
 st.title("Betting Analysis Dashboard")
 st.markdown("""
