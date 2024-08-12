@@ -202,7 +202,7 @@ An incentive for first-timers or those below a certain age can be offered for th
 
 first_bets = df[df['Is First Bet'] == 'Y']
 age_groups = pd.cut(first_bets['User Age'], bins=[0, 25, 35, 45, 55, 65, 100], 
-                    labels=['18-25', '26-35', '36-45', '46-55', '56-65', '65+'])
+                    labels=['18-25', '26-35', '36-45', '46-55', '56-65', '65+'], include_lowest=True)
 
 fig, ax = plt.subplots(figsize=(12, 6))
 ax.scatter(first_bets['User Age'], first_bets['Bet Amount per Event'], alpha=0.5)
@@ -227,12 +227,15 @@ st.markdown(f"- Correlation between age and first bet amount: {correlation_age_a
 
 first_bet_by_age_group = first_bets.groupby(age_groups)['Bet Amount per Event'].agg(['mean', 'median', 'count'])
 first_bet_by_age_group.columns = ['Average Amount', 'Median Amount', 'Number of First Bets']
-first_bet_by_age_group['Average Amount'] = first_bet_by_age_group['Average Amount'].round(2)
-first_bet_by_age_group['Median Amount'] = first_bet_by_age_group['Median Amount'].round(2)
+first_bet_by_age_group = first_bet_by_age_group.reset_index()
+first_bet_by_age_group.columns = ['Age Group'] + list(first_bet_by_age_group.columns[1:])
 
 st.markdown("First Bet Analysis by Age Group:")
-st.dataframe(first_bet_by_age_group)
-
+st.dataframe(first_bet_by_age_group.style.format({
+    'Average Amount': '${:.2f}',
+    'Median Amount': '${:.2f}',
+    'Number of First Bets': '{:.0f}'
+}))
 first_bet_percentage = (df['Is First Bet'] == 'Y').mean() * 100
 st.markdown(f"Percentage of bets that are first-time bets: {first_bet_percentage:.2f}%")
 
