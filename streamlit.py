@@ -175,11 +175,16 @@ st.pyplot(fig)
 correlation = df['User Age'].corr(df['Is Multi Bet'].astype(int))
 st.markdown(f"Correlation between age and multi-bet preference: {correlation:.2f}")
 
-age_groups = pd.cut(df['User Age'], bins=[18, 25, 35, 45, 55, 65, 80], labels=['18-25', '26-35', '36-45', '46-55', '56-65', '65+'])
+age_groups = pd.cut(df['User Age'], bins=[18, 25, 35, 45, 55, 65, 80], labels=['18-25', '26-35', '36-45',
+                                                                               '46-55', '56-65', '65+'],include_lowest=True)
 multi_bet_by_age_group = df.groupby(age_groups)['Is Multi Bet'].mean() * 100
 
+
+multi_bet_by_age_group_df = multi_bet_by_age_group.reset_index()
+multi_bet_by_age_group_df.columns = ['Age Group', 'Percentage of Multi-Bets']
+
 st.markdown("Percentage of Multi-Bets by Age Group:")
-st.dataframe(multi_bet_by_age_group)
+st.dataframe(multi_bet_by_age_group_df.style.format({'Percentage of Multi-Bets': '{:.2f}%'}))
 
 avg_bet_amount = df.groupby('Is Multi Bet')['Bet Amount per Event'].mean()
 st.markdown("Average Bet Amount per Event:")
