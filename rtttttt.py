@@ -33,7 +33,7 @@ st.markdown("## Data Loading and Overview")
 uploaded_file = st.file_uploader("Choose an Excel file", type="xlsx")
 
 if uploaded_file is not None:
-    df = pd.read_excel('HomeworDATA.xlsx')
+    df = pd.read_excel(uploaded_file)
 
     # Display the dataframe
     st.write("### Data Preview")
