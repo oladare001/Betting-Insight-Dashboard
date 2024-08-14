@@ -170,6 +170,7 @@ with col7:
     ax.set_title('Distribution of Pre-match vs. In-play Bets')
     st.pyplot(fig)
 
+
 with col8:
     fig, ax = plt.subplots()
     event_type_by_sport = df.groupby('Sport')['Event Type'].value_counts(normalize=True).unstack()
@@ -180,8 +181,9 @@ with col8:
     plt.legend(title='Event Type')
     plt.xticks(rotation=90)
     st.pyplot(fig)
-
+st.markdown("""Proportion of each event type within each sport""")
 st.dataframe(event_type_by_sport)
+
 
 avg_bet_by_event_type = df.groupby('Event Type')['Bet Amount per Event'].mean()
 st.markdown("Average Bet Amount per Event:")
