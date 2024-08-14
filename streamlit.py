@@ -272,7 +272,7 @@ st.markdown(f"Percentage of bets that are first-time bets: {first_bet_percentage
 # User Behaviour with Multi bet and Event odds
 st.header("User Behaviour with Multi bet and Event odds")
 st.markdown("""
-To what extent or size of event do bet users commit betting in a Multi bet scenario.
+To what extent or size of event do bet users commit their betting amount in a Multi bet scenario.
 
 From this image, The number of sport events users take on high odds is 2 types of sport events.
 The higher the number of sport event combinations in a multi-bet series, the lower the odds.
@@ -332,6 +332,12 @@ ax.set_ylabel('Bet Amount per Event')
 ax.set_title('Betting Behavior Segments')
 ax.legend(title='Cluster')
 st.pyplot(fig)
+
+
+age_range_by_cluster = df.groupby('Cluster')['User Age'].agg(['min', 'max', 'mean']).reset_index()
+st.markdown("### Age Range for Each Cluster")
+st.dataframe(age_range_by_cluster)
+
 
 # Profitability Insight
 st.header("Profitability Insight")
