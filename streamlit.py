@@ -442,6 +442,7 @@ distinct patterns in bet amounts and multi-bet preferences.
 2. There's potential to encourage first-time bettors, especially younger users, with targeted incentives.
 3. Multi-betting behavior varies with age and could be a focus for marketing strategies.
 4. Certain sports show higher potential profitability and could be promoted more heavily.
-5. High-value users have distinct characteristics and could be targeted for retention strategies.
+5. Entertainment betting seem to be the most potential profitable sport Event for bet company with high average odd 
+6. High-value users have distinct characteristics and could be targeted for retention strategies.
 """)
 
